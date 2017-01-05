@@ -1,20 +1,16 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
+	"os"
+	"path"
+	"strconv"
 	"time"
 
-	"strconv"
-
-	"encoding/json"
-
-	"os"
-
-	"path"
-
-	"github.com/alecthomas/template"
 	"github.com/gorilla/mux"
 )
 
