@@ -1,1 +1,1 @@
-web: timestampms
+web: fcc-go-timestamp-microservice
