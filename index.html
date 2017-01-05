@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FCC Go Timestamp Microservice</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            h3 {
+                border-bottom: 1px solid  #6991ad;
+            }
+            code {
+                display: block;
+                margin: 10px 0;
+                padding: 10px;
+                background-color: #cbeaff;
+                border: 1px solid #6991ad;
+                border-radius: 3px;
+                color: #345871;
+            }
+            pre {
+                margin: 0;
+            }
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            li {
+                margin: 0 0 24px 0;
+                padding: 0;
+            }
+            .content {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            a {
+                color: #6991ad;
+                text-decoration: none;
+                transition: all .4s ease-in-out
+            }
+            a:hover {
+                color: #cbeaff;
+                text-decoration: none;
+            }
+            strong {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <h1>Timestamp Microservice</h1>
+            <p>
+                This is a timestamp microservice written with
+                <a href="https://golang.org">Go</a> as a solution to Free Code
+                Camp's <a href="https://www.freecodecamp.com/challenges/timestamp-microservice">Timestamp Microservice API Project</a>
+            </p>
+            <p><a href="https://github.com/jcloutz/fcc-go-timestamp-microservice">View Source</a></p>
+            <h2>Instructions</h2>
+            <ul>
+                <li>
+                    <strong>Unix Timestamp:</strong>
+                    Pass a unix timestamp.
+                    <code>
+                        /1231231231
+                    </code>
+                </li>
+                <li>
+                    <strong>Date String:</strong>
+                    Pass a date string in the below format(s)
+                    <code>
+                        /December 15, 2015 <br />
+                        /December%2015,%202015
+                    </code>
+                </li>
+
+                <li>
+                    <strong>Expected Return Value:</strong>
+                    The return will be a json object containing a unix timestamp
+                    and a natural human readable date.
+                    <code><pre>{
+    "unix": 1450137600,
+    "natural": "2015-12-15 00:00:00 +0000 UTC"
+}</pre>
+                    </code>
+                </li>
+            </ul>
+        </div>
+
+    </body>
+</html>

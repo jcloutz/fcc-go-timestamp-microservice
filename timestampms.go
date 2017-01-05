@@ -12,6 +12,9 @@ import (
 
 	"os"
 
+	"path"
+
+	"github.com/alecthomas/template"
 	"github.com/gorilla/mux"
 )
 
@@ -27,6 +30,7 @@ func main() {
 		port = "8080"
 	}
 	r := mux.NewRouter()
+	r.HandleFunc("/", index)
 	r.HandleFunc("/{date:[0-9]+}", unixTimeStamp)
 	r.HandleFunc("/{date}", naturalTimeStamp)
 
@@ -35,6 +39,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func index(w http.ResponseWriter, r *http.Request) {
+	path := path.Join("index.html")
+
+	temp, _ := template.ParseFiles(path)
+	temp.Execute(w, nil)
 }
 
 // unixTimeStamp will handle a request to to process a unix style integer timestamp
