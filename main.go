@@ -40,6 +40,11 @@ func dateParserMiddleware(h http.HandlerFunc) http.HandlerFunc {
 		// Get date from route parameter
 		vars := mux.Vars(r)
 		timeArg := vars["date"]
+		if timeArg == "" {
+			fmt.Println(`Missing required date argument`)
+			errorHandler(w, r)
+			return
+		}
 
 		// Declare t to hold return
 		var t Timestamp
