@@ -41,7 +41,6 @@ func dateParserMiddleware(h http.HandlerFunc) http.HandlerFunc {
 		vars := mux.Vars(r)
 		timeArg := vars["date"]
 		if timeArg == "" {
-			fmt.Println(`Missing required date argument`)
 			errorHandler(w, r)
 			return
 		}

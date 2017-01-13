@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -220,6 +221,49 @@ func TestInvalidTimestringRoute(t *testing.T) {
 
 	want := `{"unix":null,"natural":null}`
 	got := strings.TrimSpace(string(b))
+
+	if got != want {
+		t.Log("Wanted   :", want)
+		t.Log("Got      :", got)
+		t.Fatal("Mismatch")
+	}
+}
+
+func TestDateParserMiddleware(t *testing.T) {
+	// create fake handler func to wrap with dateParse middleware
+	h := func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Unreachable Code")
+	}
+	server := httptest.NewServer(http.HandlerFunc(dateParserMiddleware(h)))
+	defer server.Close()
+
+	// call / instead of /{date} to trigger error response from middleware
+	res, err := http.Get(server.URL)
+	if err != nil {
+		t.Fatal("Should be able to make get call")
+	}
+
+	defer res.Body.Close()
+	if res.StatusCode != http.StatusBadRequest {
+		t.Fatal("Response should 400 Bad Request")
+	}
+
+	b, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	got := strings.TrimSpace(string(b))
+	want := `{"unix":null,"natural":null}`
+
+	if got != want {
+		t.Log("Wanted   :", want)
+		t.Log("Got      :", got)
+		t.Fatal("Mismatch")
+	}
+
+	got = res.Header.Get(`X-Status-Reason`)
+	want = `Invalid date time format, refer to documentation.`
 
 	if got != want {
 		t.Log("Wanted   :", want)

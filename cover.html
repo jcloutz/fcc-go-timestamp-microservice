@@ -54,7 +54,7 @@
 			<div id="nav">
 				<select id="files">
 				
-				<option value="file0">github.com/jcloutz/fcc-go-timestamp-microservice/main.go (81.8%)</option>
+				<option value="file0">github.com/jcloutz/fcc-go-timestamp-microservice/main.go (82.8%)</option>
 				
 				</select>
 			</div>
@@ -110,9 +110,13 @@ func dateParserMiddleware(h http.HandlerFunc) http.HandlerFunc <span class="cov8
                 // Get date from route parameter
                 vars := mux.Vars(r)
                 timeArg := vars["date"]
+                if timeArg == "" </span><span class="cov8" title="1">{
+                        errorHandler(w, r)
+                        return
+                }</span>
 
                 // Declare t to hold return
-                var t Timestamp
+                <span class="cov8" title="1">var t Timestamp
                 var e error
 
                 // check for integer value
