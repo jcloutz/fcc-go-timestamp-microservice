@@ -1,5 +1,7 @@
 # FCC Go Timestamp Microservice
 
+[ ![Codeship Status for jcloutz/fcc-go-timestamp-microservice](https://app.codeship.com/projects/ad59a520-bb33-0134-8fb7-56b7c9b632c8/status?branch=master)](https://app.codeship.com/projects/195610)
+
 This app represents a first attempt at a microservice with Go.
 
 * Requirements: https://www.freecodecamp.com/challenges/timestamp-microservice
