@@ -179,3 +179,51 @@ func TestTimestampRoute(t *testing.T) {
 		t.Fatal("Mismatch")
 	}
 }
+
+func TestTimestringRoute(t *testing.T) {
+	ts := httptest.NewServer(app())
+	defer ts.Close()
+
+	res, err := http.Get(ts.URL + `/December%2015,%202015`)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	b, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	want := `{"unix":1450137600,"natural":"2015-12-15 00:00:00 +0000 UTC"}`
+	got := strings.TrimSpace(string(b))
+
+	if got != want {
+		t.Log("Wanted   :", want)
+		t.Log("Got      :", got)
+		t.Fatal("Mismatch")
+	}
+}
+
+func TestInvalidTimestringRoute(t *testing.T) {
+	ts := httptest.NewServer(app())
+	defer ts.Close()
+
+	res, err := http.Get(ts.URL + `/Dec%2015,%202015`)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	b, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	want := `{"unix":null,"natural":null}`
+	got := strings.TrimSpace(string(b))
+
+	if got != want {
+		t.Log("Wanted   :", want)
+		t.Log("Got      :", got)
+		t.Fatal("Mismatch")
+	}
+}
